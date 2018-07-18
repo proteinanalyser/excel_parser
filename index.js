@@ -68,16 +68,16 @@ app.post("/parse_excel", function(req, res){
     } else {
       var workbook = XLSX.read("./uploads/template.xlsx", {type:'file'});
       var first_sheet_name = workbook.SheetNames[0];
-      var worksheet = workbook.Sheets[first_sheet_name]["!cols"];
+      var worksheet = workbook.Sheets[first_sheet_name];
       
       res.send({
         error: false,
-        data: XLSX.utils.sheet_to_json(worksheet)
+        data: worksheet["!cols"]
       })
     }
   });
 })
-// 
+// XLSX.utils.sheet_to_json(worksheet)
 app.listen(app.get("port"), function() {
   console.log("App is listenning o port 3000");
 });
