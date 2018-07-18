@@ -68,7 +68,7 @@ app.post("/parse_excel", function(req, res){
     } else {
       var workbook = XLSX.read("./uploads/template.xlsx", {type:'file'});
       var first_sheet_name = workbook.SheetNames[0];
-      var worksheet = workbook.Sheets[first_sheet_name];
+      var worksheet = workbook.Sheets[first_sheet_name]["!cols"];
       
       res.send({
         error: false,
