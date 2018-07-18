@@ -72,12 +72,12 @@ app.post("/parse_excel", function(req, res){
       
       res.send({
         error: false,
-        data: worksheet["!cols"]
+        data: XLSX.utils.sheet_to_json(worksheet)
       })
     }
   });
 })
-// XLSX.utils.sheet_to_json(worksheet)
+// 
 app.listen(app.get("port"), function() {
   console.log("App is listenning o port 3000");
 });
