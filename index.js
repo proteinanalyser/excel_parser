@@ -22,10 +22,16 @@ function checkFileType(file, cb) {
   let filetypes = ".xlsx";
   let extname = path.extname(file.originalname).toLowerCase() == filetypes;
   let mimetype = file.mimetype == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-  if (mimetype && extname) {
+  if (originalname != ".xlsx") {
+    cb("The file you uploaded has a wrong file extension! The file must be .xlsx");
+  } else if(file.name !="template.xlsx"){
+    cb("Only upload the template file provided by this platform!");
+  } else if ( XLSX.read("./uploads/template.xlsx", {type:'file'}).SheetNames.length > 1){
+    cb("Please do not add any excel sheets to the template.");
+  }else if ( XLSX.read("./uploads/template.xlsx", {type:'file'}).SheetNames[0] != "Sheet1"){
+    cb("Please do not change the name of the excel sheet");
+  } else if (mimetype && extname) {
     return cb(null, true);
-  } else {
-    cb("Faça apenas o upload de ficheiros .xlsx");
   }
 }
 // Add headers
