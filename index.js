@@ -119,6 +119,10 @@ app.get("/", function(req, res){
   res.send("Unauthorized access!")
 });
 
+app.get("/parse_excel", function(req, res){
+  res.send("Unauthorized access!")
+});
+
 app.listen(app.get("port"), function () {
   console.log("App is listenning o port 3000");
 });
