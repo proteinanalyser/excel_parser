@@ -116,7 +116,7 @@ app.post("/parse_excel", function (req, res) {
 });
 
 app.get("/", function(req, res){
-  res.send("Unauthorized acces!")
+  res.send("Unauthorized access!")
 });
 
 app.listen(app.get("port"), function () {
