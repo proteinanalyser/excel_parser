@@ -16,7 +16,7 @@ const upload = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   }
-}).single("myfile");
+})
 
 function checkFileType(file, cb) {
   let filetypes = ".xlsx";
