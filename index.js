@@ -34,8 +34,7 @@ function checkFileType(file, cb) {
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://agirar.pt');
-  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
+  res.setHeader('Access-Control-Allow-Origin', 'https://pssa.herokuapp.com/');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'POST');
@@ -56,12 +55,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// Get Static Path
-app.use(express.static(path.join(__dirname, "public")));
-
-
 app.post("/parse_excel", function (req, res) {
-
   upload(req, res, (err) => {
     if (err) {
       res.send({
@@ -102,6 +96,12 @@ app.post("/parse_excel", function (req, res) {
           input_atttributes[sendJSON[0][keys[i]]].push(sendJSON[k][keys[i]])
         }
       }
+      if (input_atttributes[sample_names[0]].length > 61){
+        res.send({
+          error: true,
+          msg: "Please do not add any rows to the template file"
+        });
+      }
       fs.unlink("./uploads/template.xlsx", () => {
         res.send({
           error: false,
@@ -113,6 +113,10 @@ app.post("/parse_excel", function (req, res) {
       })
     }
   });
+});
+
+app.get("/", function(req, res){
+  res.send("Unauthorized acces!")
 });
 
 app.listen(app.get("port"), function () {
