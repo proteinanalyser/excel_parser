@@ -63,16 +63,12 @@ app.post("/parse_excel", function (req, res) {
         msg: err
       });
     } else {
-      if (XLSX.read("./uploads/template.xlsx", {
-          type: 'file'
-        }).SheetNames.length > 1) {
+      if (XLSX.read("./uploads/template.xlsx", {type: 'file'}).SheetNames.length > 1) {
         res.send({
           error: true,
           msg: "Please do not add any excel sheets to the template."
         });
-      } else if (XLSX.read("./uploads/template.xlsx", {
-          type: 'file'
-        }).SheetNames[0] != "Sheet1") {
+      } else if (XLSX.read("./uploads/template.xlsx", {type: 'file'}).SheetNames[0] != "Sheet1") {
         res.send({
           error: true,
           msg: "Please do not change the name of the excel sheet"
@@ -107,7 +103,7 @@ app.post("/parse_excel", function (req, res) {
           error: false,
           data: {
             "sample_names": sample_names,
-            "input_atttributes": input_atttributes
+            "input_attributes": input_atttributes
           }
         })
       })
