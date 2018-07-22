@@ -93,10 +93,10 @@ app.post("/parse_excel", function (req, res) {
           input_atttributes[sendJSON[0][keys[i]]].push(sendJSON[k][keys[i]])
         }
       }
-      if (input_atttributes[sample_names[0]].length > 61){
+      if (input_atttributes[sample_names[0]].length != 61){
         res.send({
           error: true,
-          msg: "Please do not add any rows to the template file"
+          msg: "Please do not add or delete any rows to the template file"
         });
       }
       fs.unlink("./uploads/template.xlsx", () => {
